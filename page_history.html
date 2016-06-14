@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <meta charset = "utf-8">
+        <title>WaterMelon</title>
+		<link rel = "Shortcut Icon" type = "image/x-icon" href = "basePicture/watermelonIcon.ico" />
+		<link rel = "stylesheet" type = "text/css" href = "baseCSS.css">
+		<link rel = "stylesheet" type = "text/css" href = "typeCSS.css">
+        <style type = "text/css">
+            #alarm  a img{
+	            font-family: 微軟正黑體;
+                position: fixed;	
+	            right: 10px;
+	            bottom: 17%;
+	            width: 79px;
+	            height: 79px;  
+            }			
+        </style>
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+		<script src = "baseJavaScript.js"></script>
+		<script>
+			var dramaName = ["winter", "queen", "star", "masters_sun", "heir", //2013
+							 "hotel","healer", "pride", "doctor", "emergency", "okay", "pinocchio", "surrounded", "king", //2014
+							 "venus", "kill", "blood", "remember", "yongpai", "20", "ghost", "smell", "girlfriend", "night", "pretty", "1988", "school", //2015
+							 "signal", "cheese", "sun", "jackpot"]; //2016
+							 
+			function loop(i){
+				$("#" + dramaName[i]).fadeTo("fast", 0);
+				$("#" + dramaName[i] + ", " + "#" + dramaName[i] + "1").hover(function(){
+					$("#" + dramaName[i] + "1").stop(true,false).fadeTo("fast", 0.5);
+					$("#" + dramaName[i]).stop(true,false).fadeTo("fast", 1);
+				},function(){
+					$("#" + dramaName[i] + "1").stop(true,false).fadeTo("fast", 1);
+					$("#" + dramaName[i]).stop(true,false).fadeTo("fast", 0);
+				});
+				
+			};
+			$(function(){
+				for(var i=0; i<dramaName.length; i++)
+					loop(i);
+			});
+			function doClickAddCollect(item) {
+				for(var i=0; i<dramaName.length; i++) {
+					if(dramaName[i] == item) {
+						localStorage.setItem(i, item);
+						return;
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id = "center">
+			<div id = "header">
+				<div id = "title">
+					<img style = "position: absolute; top: 10px; left: 10px;" src = "basePicture/watermelon.png"/>
+				</div>
+				<div id = "menu">
+					<span id = "nowPosition">現在位置:  古裝</span><br>
+					<ul>
+						<li>年份分類</li>
+						<li>劇情分類</li>
+						<li id = "myCollectionButton"><a href = "page_collection.html">我的收藏</a></li>
+						<li id = "homepageButton"><a href = "page_home.html">首頁</a></li>
+					</ul>
+				</div>
+				<div id = "horizon"></div>
+			</div>
+			<div id = "slice1">
+				<img style = "position: absolute; z-index: -2;" src = "basePicture/sliceOfWatermelon.png"/>
+				<div id = "dramaButton">
+					<div><a href = "page_romance.html">浪漫</a></div>
+					<div><a href = "page_dramatic.html">劇情</a></div>
+					<div><a href = "page_history.html">古裝</a></div>
+					<div><a href = "page_police.html">警匪</a></div>
+				</div>
+			</div>
+			<div id = "slice2">
+				<img style = "position: absolute; z-index: -2;" src = "basePicture/sliceOfWatermelon.png"/>
+				<div id = "yearButton">
+					<div><a href = "page_2016.html">2016</a></div>
+					<div><a href = "page_2015.html">2015</a></div>
+					<div><a href = "page_2014.html">2014</a></div>
+					<div><a href = "page_2013.html">2013</a></div>
+					</div>
+			</div>
+			<div id = "container">
+				<div class = "space"></div>
+<!-- ======================================================================================================================================================= -->
+				<div style = "float: left; text-align: center;">
+					<a href = "page_jackpot.html">
+						<img id = "jackpot1" src = "straight_post/jackpot1.jpg" /><br>
+						<div class = "name">大發</div>
+					</a>
+					<img id = "jackpot" style = "position: relative; top: -93px; left: 20px; cursor: pointer;" src = "basePicture/addCollect.png" onclick = "doClickAddCollect(id)" />
+				</div>
+				<div style = "float: left; text-align: center;">
+					<a href = "page_night.html">
+						<img id = "night1" src = "straight_post/night1.jpg" /><br>
+						<div class = "name">夜行書生</div>
+					</a>
+					<img id = "night" style = "position: relative; top: -93px; left: 20px; cursor: pointer;" src = "basePicture/addCollect.png" onclick = "doClickAddCollect(id)" />
+				</div>
+				<div style = "float: left; text-align: center;">
+					<a href = "page_king.html">
+						<img id = "king1" src = "straight_post/king1.jpg" /><br>
+						<div class = "name">王的面孔</div>
+					</a>
+					<img id = "king" style = "position: relative; top: -93px; left: 20px; cursor: pointer;" src = "basePicture/addCollect.png" onclick = "doClickAddCollect(id)" />
+				</div>
+				<div style = "float: left; text-align: center;">
+					<a href = "page_queen.html">
+						<img id = "queen1" src = "straight_post/queen1.jpg" /><br>
+						<div class = "name">奇皇后</div>
+					</a>
+					<img id = "queen" style = "position: relative; top: -93px; left: 20px; cursor: pointer;" src = "basePicture/addCollect.png" onclick = "doClickAddCollect(id)" />
+				</div>
+				<div class = "space"></div>
+<!-- ======================================================================================================================================================= -->
+				<div id = "footer">
+				     <a href = "第15組_watermelon.pptx" download = "watermelon">說明文件</a>
+                </div>
+			</div>			
+		</div>
+		<div id = "alarm">
+		    <a href = "index.html" target = "_blank">
+			    <img style = "" src = "basePicture/clock.png"/>
+			</a>
+		</div>
+	</body>
+</html>

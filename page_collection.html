@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <meta charset = "utf-8">
+        <title>WaterMelon</title>
+		<link rel = "Shortcut Icon" type = "image/x-icon" href = "basePicture/watermelonIcon.ico" />
+		<link rel = "stylesheet" type = "text/css" href = "baseCSS.css">
+		<link rel = "stylesheet" type = "text/css" href = "typeCSS.css">
+        <style type = "text/css">			
+			#alarm  a img{
+	            font-family: 微軟正黑體;
+                position: fixed;	
+	            right: 10px;
+	            bottom: 17%;
+	            width: 79px;
+	            height: 79px;  
+            }
+        </style>
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+		<script src = "baseJavaScript.js"></script>
+		<script>
+			var dramaName = ["winter", "queen", "star", "masters_sun", "heir", //2013
+							 "hotel","healer", "pride", "doctor", "emergency", "okay", "pinocchio", "surrounded", "king", //2014
+							 "venus", "kill", "blood", "remember", "yongpai", "20", "ghost", "smell", "girlfriend", "night", "pretty", "1988", "school", //2015
+							 "signal", "cheese", "sun", "jackpot"]; //2016
+			var dramaNameCh = ["那年冬天起風了", "奇皇后", "來自星星的你", "主君的太陽", "繼承者們", //2013
+							   "酒店之王", "Healer", "傲慢與偏見", "異鄉人醫生", "急診男女", "沒關係是愛情啊", "皮諾丘", "你們被包圍了", "王的面孔", //2014
+							   "我的維納斯", "Kill Me Heal Me", "Blood", "記得 兒子的戰爭", "龍八夷", "第二次二十歲", "我的鬼神君", "看見味道的少女", //2015
+							   "前女友俱樂部", "夜行書生", "她很漂亮", "請回答 1988", "你是誰學校 2015", //2015
+							   "信號", "奶酪陷阱", "太陽的後裔", "大發"]; //2016	
+			
+			function start() {
+			   displayMyCollection();			   
+			}
+			function loop(i){
+				$("#" + dramaName[i]).fadeTo("fast", 0);
+				$("#" + dramaName[i] + ", " + "#" + dramaName[i] + "1").hover(function(){
+					$("#" + dramaName[i] + "1").stop(true,false).fadeTo("fast", 0.5);
+					$("#" + dramaName[i]).stop(true,false).fadeTo("fast", 1);
+				},function(){
+					$("#" + dramaName[i] + "1").stop(true,false).fadeTo("fast", 1);
+					$("#" + dramaName[i]).stop(true,false).fadeTo("fast", 0);
+				});
+				
+			};
+			function doClickDeleteCollect(item) {
+				for(var i=0; i<dramaName.length; i++) {
+					if(dramaName[i] == item) {
+						localStorage.removeItem(i);
+						displayMyCollection();
+						return;
+					}
+				}
+			}
+			function doClickRemoveAll() {
+				localStorage.clear();
+				displayMyCollection();
+			}
+			function displayMyCollection() {
+				var length = localStorage.length;
+				storage = [];
+				for(var i=0; i<length; i++)
+					storage[i] = localStorage.key(i);
+				var headCode = "<div class = 'space'></div>";
+				var footCode = "<div class = 'space'></div>"
+							 + "<img width = '105px' height = '44px' style = 'float: right; margin-right: 100px; cursor: pointer;' src = 'basePicture/removeAllCollect.png' onclick = 'doClickRemoveAll()' />"
+							 + "<div class = 'space'></div>"
+							 + "<div id = 'footer'><a href = 'https://www.google.com.tw/' target = '_blank'>說明文件</a></div>";
+				var middleCode = "";
+				if(length == 0) {
+					middleCode = headCode + headCode
+							   + "<p style = 'color: #5CA4A9; font-size: 70px; font-weight: bolder; text-align: center;'>目前沒有任何收藏</p>";
+					var footCode = "<div class = 'space'></div>"
+								 + "<div id = 'footer'><a href = 'https://www.google.com.tw/' target = '_blank'>說明文件</a></div>";
+				}
+				else {
+					for(i=0; i<length; i++) {
+						middleCode += "<div style = 'float: left; text-align: center;'>"
+									+ "<a href = 'page_" + localStorage.getItem(storage[i]) +  ".html'>"
+									+ "<img id = '" + localStorage.getItem(storage[i]) + "1' src = 'straight_post/" + localStorage.getItem(storage[i]) + "1.jpg' /><br>"
+									+ "<div class = 'name'>" + dramaNameCh[storage[i]] + "</div></a>"
+									+ "<img id = '" + localStorage.getItem(storage[i]) + "'class = 'deleteCollect' style = 'position: relative; top: -90px; left: 20px; cursor: pointer;' src = 'basePicture/deleteCollect.png' onclick = 'doClickDeleteCollect(id)' /></div>";
+					}
+				}
+				document.getElementById("container").innerHTML = headCode + middleCode + footCode;
+				$(function(){
+					for(var i=0; i<dramaName.length; i++)
+						loop(i);
+				});
+				//算總高度
+				$(function(){
+					var containerH = $('#container').height();
+					var centerH = $('#center').height();
+					var documentH = $(document).height();
+					
+					/*console.log(containerH);
+					console.log(centerH);
+					console.log($(document).height());*/
+					if(containerH + centerH < documentH) {
+						var temp = documentH - containerH - centerH;
+						$("<div style = 'float:left; width: 100%; height: " + temp + "px;'></div>").insertBefore("#footer", this);
+					}
+				});
+			}
+			window.addEventListener( "load", start, false );
+		</script>
+	</head>
+	<body>
+		<div id = "center">
+			<div id = "header">
+				<div id = "title">
+					<img style = "position: absolute; top: 10px; left: 10px;" src = "basePicture/watermelon.png"/>
+				</div>
+				<div id = "menu">
+					<span id = "nowPosition">現在位置:  我的收藏</span><br>
+					<ul>
+						<li>年份分類</li>
+						<li>劇情分類</li>
+						<li id = "myCollectionButton"><a href = "page_collection.html">我的收藏</a></li>
+						<li id = "homepageButton"><a href = "page_home.html">首頁</a></li>
+					</ul>
+				</div>
+				<div id = "horizon"></div>
+			</div>
+			<div id = "slice1">
+				<img style = "position: absolute; z-index: -2;" src = "basePicture/sliceOfWatermelon.png"/>
+				<div id = "dramaButton">
+					<div><a href = "page_romance.html">浪漫</a></div>
+					<div><a href = "page_dramatic.html">劇情</a></div>
+					<div><a href = "page_history.html">古裝</a></div>
+					<div><a href = "page_police.html">警匪</a></div>
+				</div>
+			</div>
+			<div id = "slice2">
+				<img style = "position: absolute; z-index: -2;" src = "basePicture/sliceOfWatermelon.png"/>
+				<div id = "yearButton">
+					<div><a href = "page_2016.html">2016</a></div>
+					<div><a href = "page_2015.html">2015</a></div>
+					<div><a href = "page_2014.html">2014</a></div>
+					<div><a href = "page_2013.html">2013</a></div>
+				</div>
+			</div>
+			<div id = "container">				
+<!-- ======================================================================================================================================================= -->
+				<div id = "footer">
+				     <a href = "第15組_watermelon.pptx" download = "watermelon">說明文件</a>
+                </div>
+<!-- ======================================================================================================================================================= -->
+				
+			</div>
+		</div>
+		<div id = "alarm">
+		    <a href = "index.html" target = "_blank">
+			    <img style = "" src = "basePicture/clock.png"/>
+			</a>
+		</div>
+	</body>
+</html>

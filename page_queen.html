@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <meta charset = "utf-8">
+        <title>WaterMelon</title>
+		<link rel = "Shortcut Icon" type = "image/x-icon" href = "basePicture/watermelonIcon.ico" />
+		<link rel = "stylesheet" type = "text/css" href = "baseCSS.css">
+        <style type = "text/css">
+			#container {				
+				text-align: center;
+			}
+			h1 {
+				text-align:center;
+				color:#FFF;
+				font-size:30px;
+				line-height:60px;
+				font-family:"微軟正黑體";
+				text-shadow:1px 1px 1px #000000;
+			}
+			#BOX {
+				width:680px;
+				margin:20px auto;
+			}
+			#SMALL img {
+                width: 120px;
+                height: 120px;				
+				box-shadow:1px 5px 10px #333;
+				cursor:pointer;
+				margin-bottom:8px;
+			}
+			#SMALL {
+				width:140px;
+				float:left;
+				margin-left: 100px;
+			}		  
+        </style>
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+		<script src = "baseJavaScript.js"></script>
+		<script src = "collectionJS.js"></script>
+		<script>
+			var actorName = ["奇承娘 (河智苑 飾)", "王裕 (朱鎮模 飾)", "妥懽 (池昌旭 飾)"];
+			var actorScript = [ "在少時和母親被選作成高麗貢女，被逼獻進元朝工作，後來親眼目睹母親死於唐其勢箭下，為了向害死母親的高麗王族王暠報仇，一直以男裝生活。",
+								"為了欺騙牽制自己的王暠而一直過著放蕩不羈的生活，和小混混們混在一起，為了等待時機，低調行事以找出王暠的罪證。",
+								"雖為元明宗的長子，但因朝廷權臣和太后卜答失里的壓制，皇位被身體虛弱的弟弟所繼承，自己亦被發配到高麗的大青島。"];
+            
+			
+			//劇情簡介
+			function introduction(){
+				var imgH = $('#intro img').height()
+				$('#intro').height(imgH);
+				var imgW = $('#intro img').width()
+				$('#intro').width(imgW);
+				$('#intro .introCaption').width(imgW - 40);
+				var _titleHeight = 55;
+                $('#intro').each(function(){
+                    var $this = $(this), 
+                    _height = $this.height(),
+                    $introCaption = $('.introCaption', $this),
+                    _captionHeight = $introCaption.outerHeight(true),
+                    _speed = 200;
+					$introCaption.animate({top: _height - _titleHeight}, 0);
+                    $this.hover(function(){
+                        $introCaption.stop().animate({top: _height - _captionHeight}, _speed);
+                    }, function(){
+                        $introCaption.stop().animate({top: _height - _titleHeight}, _speed);
+                    });
+                });
+            };	
+			window.addEventListener("load", introduction, false);		
+			//選照片
+            $(function(){     
+				$("#BIG img").attr( "src" , "queen/" + 1 + ".jpg" );    
+				$(".caption h2").text(actorName[0]);
+				$(".caption .description").text(actorScript[0]);
+				$(".caption .description").attr( "height" , "100%" );       	
+            	$("#SMALL img").click(function(){         		
+            		var N = $(this).attr("id").substr(2);         		
+            		$("#BIG img").attr( "src" , "queen/" + N + ".jpg" );    
+					$(".caption h2").text(actorName[N-1]);
+					$(".caption .description").text(actorScript[N-1]);
+					$(".caption .description").attr( "height" , "100%" );   
+            	});         
+            });
+			
+            //人物介紹
+            $(function(){
+				var imgH = $('#BIG img').height()
+				$('#BIG').height(imgH);
+				var imgW = $('#BIG img').width()
+				$('#BIG').width(imgW);
+				$('#BIG .caption').width(imgW - 40);
+				
+				
+            // 預設標題區塊 #BIG .caption 的 top
+                var _titleHeight = 55;
+                $('#BIG').each(function(){
+                    // 先取得區塊的高及標題區塊等資料
+                    var $this = $(this), 
+                    _height = $this.height(), 
+                    $caption = $('.caption', $this),
+                    _captionHeight = $caption.outerHeight(true),
+                    _speed = 200;
+					$caption.animate({top: _height - _titleHeight}, 0);
+                    // 當滑鼠移動到區塊上時
+                    $this.hover(function(){
+                        // 讓 $caption 往上移動
+                        $caption.stop().animate({top: _height - _captionHeight}, _speed);
+                    }, function(){
+                        // 讓 $caption 移回原位
+                        $caption.stop().animate({top: _height - _titleHeight}, _speed);
+                    });
+                });
+            });
+		</script>
+	</head>
+	<body>
+		<div id = "center">
+			<div id = "header">
+				<div id = "title">
+					<img style = "position: absolute; top: 10px; left: 10px;" src = "basePicture/watermelon.png"/>
+				</div>
+				<div id = "menu">
+					<span id = "nowPosition">現在位置:  奇皇后</span><br>
+					<ul>
+						<li>年份分類</li>
+						<li>劇情分類</li>
+						<li id = "myCollectionButton"><a href = "page_collection.html">我的收藏</a></li>
+						<li id = "homepageButton"><a href = "page_home.html">首頁</a></li>
+					</ul>
+				</div>
+				<div id = "horizon"></div>
+			</div>
+			<div id = "slice1">
+				<img style = "position: absolute; z-index: -2;" src = "basePicture/sliceOfWatermelon.png"/>
+				<div id = "dramaButton">
+					<div><a href = "page_romance.html">浪漫</a></div>
+					<div><a href = "page_dramatic.html">劇情</a></div>
+					<div><a href = "page_history.html">古裝</a></div>
+					<div><a href = "page_police.html">警匪</a></div>
+				</div>
+			</div>
+			<div id = "slice2">
+				<img style = "position: absolute; z-index: -2;" src = "basePicture/sliceOfWatermelon.png"/>
+				<div id = "yearButton">
+					<div><a href = "page_2016.html">2016</a></div>
+					<div><a href = "page_2015.html">2015</a></div>
+					<div><a href = "page_2014.html">2014</a></div>
+					<div><a href = "page_2013.html">2013</a></div>
+					</div>
+			</div>
+			<div id = "container">
+				<div class = "space"></div>
+<!-- ======================================================================================================================================================= -->
+				<h1>劇情簡介</h1>
+				<div id = "intro">
+					<img src="intro_post/queen2.jpg" />
+					<div class = "introCaption">
+						<h2>奇皇后</h2>
+						<div class = "introDescription">
+							奇承娘從被高麗進獻給元朝的貢女，成為皇宮中的元朝奉茶宮女，卻因緣巧合下得到元朝皇帝的愛慕，最後登上元朝皇后之位。
+						</div>
+					</div>
+				</div>
+
+				<h1>人物介紹</h1>
+				<div id = "BOX">
+					<div id = "SMALL">
+						<img src="queen/s1.png" width="110" height="110" id="SS1">
+						<img src="queen/s2.png" width="110" height="110" id="SS2">
+						<img src="queen/s3.png" width="110" height="110" id="SS3">
+					</div>
+					<div id = "BIG" style = "margin-right: 150px;">
+						<img src="queen/1.jpg" width="260" height="385">
+						<div class = "caption">
+							<h2></h2>
+							<div class = "description"></div>
+						</div>
+					</div>
+				</div>
+				<h1><br><br><br><br><br><br><br><br>戲劇列表</h1>
+				<div class = "styled-select">
+					<form>
+						<select id = "linkSelect" name = "linkSelect" onchange = "window.open(this.options[this.selectedIndex].value); this.selectedIndex = 0;">
+							<option style = "display: none;">奇皇后</option>
+							<option value = "http://www.dailymotion.com/video/kGBkG8E5zEWjPNgqsII">第1集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k2ethODbV1xRrOgqtcX">第1集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k21OcsvF6D7LmWgrXwE">第2集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k7hfozKh59HrC3grYfO">第2集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k6QYimxCW1Bw9SgAMhx">第3集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/kdnyNi8qt6cUPxgANOa">第3集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k2jyNF4K7er55pgCBkI">第4集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k69zTMdK3l9pcJgCCc2">第4集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k3ES4AzGEJCQhsgN2G7">第5集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k7GLK0zR0kUVw9gN3vE">第5集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k6RXIwma3zNQ6XgP9x1">第6集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k4Cdflldhyx6EYgPaGb">第6集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k2TxUlaUUXtRAugYNCN">第7集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k3PUIKU2H5woTSgYNXI">第7集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/kkFoier1PLNHK5h0Mpg">第8集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k5F7xowCjc6X7Hh0MEt">第8集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k2aMMQq6jaZQ3Jh9NbW">第9集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k2ln2xvsk5nksdh9NvT">第9集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7zrn1agY9ulvNhbtso">第10集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k40K0VhbuOZ74Thbu5g">第10集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k3L2DRLbGG2nwihj9RY">第11集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k5ykG9liM92tQPhjaBR">第11集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k6VotaIa1eXRuhhkRyt">第12集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k3X0M6MHghxizthkRP8">第12集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k1rtyRWSbniuDRhrzlb">第13集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/kWpJng5aztqPnShrzEK">第13集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k77F3pPuXEFfv5htiVM">第14集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k6vMgHlbgA5dFphtjlL">第14集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k1Y6XqZYlkmvobhBsVP">第15集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k3TPYMbF61E9NAhBuON">第15集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第16集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第16集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第17集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第17集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第18集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第18集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第19集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第19集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第20集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第20集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第21集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第21集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第22集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第22集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第23集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第23集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第24集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第24集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第25集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第25集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第26集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第26集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第27集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第27集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第28集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第28集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第29集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第29集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第30集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第30集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第31集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第31集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第32集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第32集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第33集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第33集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第34集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第34集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第35集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第35集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第36集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第36集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第37集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第37集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第38集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第38集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第39集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第39集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第40集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第40集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第41集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第41集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第42集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第42集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第43集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第43集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第44集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第44集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第45集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第45集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第46集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第46集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第47集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第47集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第48集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第48集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第49集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第49集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第50集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第50集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7y1VHbJiW8Pc0hD2X0">第51集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k22fCMQWaZpjMihD3u0">第51集 Part 2</option>
+						</select>
+					</form>
+				</div>
+				
+				<h1><br>OST</h1>
+				
+				
+				<p class = "ost">1. 荊棘的愛 	(4MEN)</p>
+				<iframe class = "youtube" width="560" height="315" src="https://www.youtube.com/embed/fS0bxTivRJg" frameborder="0" allowfullscreen></iframe>
+				
+				<p class = "ost">2.愛情風   (Wax)</p>
+				<iframe class = "youtube" width="560" height="315" src="https://www.youtube.com/embed/4lWFB5NBheY" frameborder="0" allowfullscreen></iframe>
+				
+<!-- ======================================================================================================================================================= -->
+				<div class = "space"></div>
+				<div id = "footer">
+				     <a href = "第15組_watermelon.pptx" download = "watermelon">說明文件</a>
+                </div>
+			</div>
+		</div>
+		<div id = "alarm">
+		    <a href = "index.html" target = "_blank">
+			    <img style = "" src = "basePicture/clock.png"/>
+			</a>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="zh-tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+<title>人物介紹</title>
+<style type="text/css">
+	.abgne_tip_gallery_block {
+		margin: 0;
+		padding: 0;
+		width: 450px;
+		height: 250px;
+		overflow: hidden;
+		position: relative;
+	}
+	.abgne_tip_gallery_block img {
+		position: absolute;
+		border: 0;
+	}
+	.abgne_tip_gallery_block .caption {
+		position: absolute;
+		top: 195px;	/* .abgne_tip_gallery_block 的高 - 想顯示 title 的高(這邊是設 55) */
+		width: 390px;	/* .abgne_tip_gallery_block 的寬 - .caption 的左右 padding */
+		padding: 15px 30px 20px;
+		cursor: pointer;
+		color: #fff;
+		background: url(images/1px_black.png) repeat;
+	}
+	.abgne_tip_gallery_block .caption h2 {
+		margin: 0;
+		padding: 0px 0px 15px;
+	}
+	.abgne_tip_gallery_block .caption h2 a {
+		text-decoration: none;
+		color: #fc6; 
+	}
+	.abgne_tip_gallery_block .caption h2 a:hover {
+		text-decoration: underline;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		// 預設標題區塊 .abgne_tip_gallery_block .caption 的 top
+		var _titleHeight = 55;
+		$('.abgne_tip_gallery_block').each(function(){
+			// 先取得區塊的高及標題區塊等資料
+			var $this = $(this), 
+				_height = $this.height(), 
+				$caption = $('.caption', $this),
+				_captionHeight = $caption.outerHeight(true),
+				_speed = 200;
+			
+			// 當滑鼠移動到區塊上時
+			$this.hover(function(){
+				// 讓 $caption 往上移動
+				$caption.stop().animate({
+					top: _height - _captionHeight
+				}, _speed);
+			}, function(){
+				// 讓 $caption 移回原位
+				$caption.stop().animate({
+					top: _height - _titleHeight
+				}, _speed);
+			});
+		});
+	});
+</script>
+</head>
+
+<body>
+	<div class="abgne_tip_gallery_block">
+		<a href="#"><img src="1.jpg" title="" alt="" /></a> 
+		<div class="caption">
+			<h2><a href="#">圖片來源-梅問題</a></h2>
+			<div class="desc">
+				♣梅問題‧教學網【Minwt】♣ | 分享與記錄關於Photoshop教學、網頁教學、Wordpress教學、Flex教學、 Flash教學&#8230;等，也歡迎遇到以上任何問題都可到梅問題來找答案喔!  |  數位攝影
+			</div>
+		</div>
+	</div>
+</body>
+</html>

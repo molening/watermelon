@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <meta charset = "utf-8">
+        <title>WaterMelon</title>
+		<link rel = "Shortcut Icon" type = "image/x-icon" href = "basePicture/watermelonIcon.ico" />
+		<link rel = "stylesheet" type = "text/css" href = "baseCSS.css">
+        <style type = "text/css">
+			#container {					
+				text-align: center;
+			}
+			h1 {
+				text-align:center;
+				color:#FFF;
+				font-size:30px;
+				line-height:60px;
+				font-family:"微軟正黑體";
+				text-shadow:1px 1px 1px #000000;
+			}
+			#BOX {
+				width:600px;
+				margin:20px auto;
+			}
+			#SMALL img {				
+				box-shadow:1px 5px 10px #333;
+				cursor:pointer;
+				margin-bottom:7px;
+			}
+			#SMALL {
+				width:140px;
+				float:left;
+				margin-left: 80px;
+			}		  
+        </style>
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+		<script src = "baseJavaScript.js"></script>
+		<script src = "collectionJS.js"></script>
+		<script>
+			var actorName = ["金秀珍 (宋智孝 飾)","房明秀 (卞耀漢 飾)", "張英花 (李允智 飾)", "羅智雅 (張智恩 飾)", "LaLa (柳和榮 飾)"];
+			var actorScript = [ "電影製作人, 散發著自我主張的帥氣現代女性, 「自稱」明秀的前女友。",
+								"網路漫畫家以及「大家的男朋友」, 雖然稱不上能言善辯, 但隱約的似乎相當聰明,常常把對自己不利的話題引開。",				    
+								"職業女強人, 天性好強, 想要的東西赴湯蹈火也在所不惜, 不管甚麼都要做到最後的風格,明秀的前前女友。",
+								"餐廳老闆, 冷酷黃金等級的年上離婚女, 是明秀難以忘懷的初戀姊姊。",
+								"三流性感女演員, 擁有魔鬼身材但在演藝圈打滾多年始終紅不太起來, 是明秀的前女友。"];
+            
+			
+			//劇情簡介
+			function introduction(){
+				var imgH = $('#intro img').height()
+				$('#intro').height(imgH);
+				var imgW = $('#intro img').width()
+				$('#intro').width(imgW);
+				$('#intro .introCaption').width(imgW - 40);
+				var _titleHeight = 55;
+                $('#intro').each(function(){
+                    var $this = $(this), 
+                    _height = $this.height(),
+                    $introCaption = $('.introCaption', $this),
+                    _captionHeight = $introCaption.outerHeight(true),
+                    _speed = 200;
+					$introCaption.animate({top: _height - _titleHeight}, 0);
+                    $this.hover(function(){
+                        $introCaption.stop().animate({top: _height - _captionHeight}, _speed);
+                    }, function(){
+                        $introCaption.stop().animate({top: _height - _titleHeight}, _speed);
+                    });
+                });
+            };	
+			window.addEventListener("load", introduction, false);   
+			//選照片
+            $(function(){     
+				$("#BIG img").attr( "src" , "girlfriend/" + 1 + ".jpg" );    
+				$(".caption h2").text(actorName[0]);
+				$(".caption .description").text(actorScript[0]);
+				$(".caption .description").attr( "height" , "100%" );       	
+            	$("#SMALL img").click(function(){         		
+            		var N = $(this).attr("id").substr(2);         		
+            		$("#BIG img").attr( "src" , "girlfriend/" + N + ".jpg" );    
+					$(".caption h2").text(actorName[N-1]);
+					$(".caption .description").text(actorScript[N-1]);
+					$(".caption .description").attr( "height" , "100%" );   
+            	});         
+            });
+			
+            //人物介紹
+            $(function(){
+				var imgH = $('#BIG img').height()
+				$('#BIG').height(imgH);
+				var imgW = $('#BIG img').width()
+				$('#BIG').width(imgW);
+				$('#BIG .caption').width(imgW - 40);
+				
+				
+            // 預設標題區塊 #BIG .caption 的 top
+                var _titleHeight = 55;
+                $('#BIG').each(function(){
+                    // 先取得區塊的高及標題區塊等資料
+                    var $this = $(this), 
+                    _height = $this.height(), 
+                    $caption = $('.caption', $this),
+                    _captionHeight = $caption.outerHeight(true),
+                    _speed = 200;
+					$caption.animate({top: _height - _titleHeight}, 0);
+                    // 當滑鼠移動到區塊上時
+                    $this.hover(function(){
+                        // 讓 $caption 往上移動
+                        $caption.stop().animate({top: _height - _captionHeight}, _speed);
+                    }, function(){
+                        // 讓 $caption 移回原位
+                        $caption.stop().animate({top: _height - _titleHeight}, _speed);
+                    });
+                });
+            });
+		</script>
+	</head>
+	<body>
+		<div id = "center">
+			<div id = "header">
+				<div id = "title">
+					<img style = "position: absolute; top: 10px; left: 10px;" src = "basePicture/watermelon.png"/>
+				</div>
+				<div id = "menu">
+					<span id = "nowPosition">現在位置:  前女友俱樂部</span><br>
+					<ul>
+						<li>年份分類</li>
+						<li>劇情分類</li>
+						<li id = "myCollectionButton"><a href = "page_collection.html">我的收藏</a></li>
+						<li id = "homepageButton"><a href = "page_home.html">首頁</a></li>
+					</ul>
+				</div>
+				<div id = "horizon"></div>
+			</div>
+			<div id = "slice1">
+				<img style = "position: absolute; z-index: -2;" src = "basePicture/sliceOfWatermelon.png"/>
+				<div id = "dramaButton">
+					<div><a href = "page_romance.html">浪漫</a></div>
+					<div><a href = "page_dramatic.html">劇情</a></div>
+					<div><a href = "page_history.html">古裝</a></div>
+					<div><a href = "page_police.html">警匪</a></div>
+				</div>
+			</div>
+			<div id = "slice2">
+				<img style = "position: absolute; z-index: -2;" src = "basePicture/sliceOfWatermelon.png"/>
+				<div id = "yearButton">
+					<div><a href = "page_2016.html">2016</a></div>
+					<div><a href = "page_2015.html">2015</a></div>
+					<div><a href = "page_2014.html">2014</a></div>
+					<div><a href = "page_2013.html">2013</a></div>
+					</div>
+			</div>
+			<div id = "container">
+				<div class = "space"></div>
+<!-- ======================================================================================================================================================= -->
+				<h1>劇情簡介</h1>
+				<div id = "intro">
+					<img src="intro_post/girlfriend2.jpg" />
+					<div class = "introCaption">
+						<h2>前女友俱樂部</h2>
+						<div class = "introDescription">
+							人氣漫畫作家房明秀, 及企圖將房明秀講述前女友故事的漫畫作品電影化的製作人金秀珍之間發生的浪漫愛情喜劇故事, 過程中房明秀和四個前女友們再度“歡聚一堂。
+						</div>
+					</div>
+				</div>
+                
+				<h1>人物介紹</h1>
+				<div id = "BOX">
+					<div id = "SMALL">
+						<img src="girlfriend/s1.png" width="80" height="80" id="SS1">
+						<img src="girlfriend/s2.png" width="80" height="80" id="SS2">
+						<img src="girlfriend/s3.png" width="80" height="80" id="SS3">
+						<img src="girlfriend/s4.png" width="80" height="80" id="SS4">
+						<img src="girlfriend/s5.png" width="80" height="80" id="SS5">
+					</div>
+					<div id = "BIG">
+						<img src="girlfriend/1.jpg" width="320" height="370">
+						<div class = "caption">
+							<h2></h2>
+							<div class = "description"></div>
+						</div>
+					</div>
+				</div>
+				
+				<h1><br><br><br><br><br><br><br><br><br><br><br><br><br>戲劇列表</h1>
+				<div class = "styled-select">
+					<form>
+						<select id = "linkSelect" name = "linkSelect" onchange = "window.open(this.options[this.selectedIndex].value); this.selectedIndex = 0;">
+							<option style = "display: none;">前女友俱樂部</option>
+							<option value = "http://www.dailymotion.com/video/kGBkG8E5zEWjPNgqsII">第1集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k2ethODbV1xRrOgqtcX">第1集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k21OcsvF6D7LmWgrXwE">第2集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k7hfozKh59HrC3grYfO">第2集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k6QYimxCW1Bw9SgAMhx">第3集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/kdnyNi8qt6cUPxgANOa">第3集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k2jyNF4K7er55pgCBkI">第4集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k69zTMdK3l9pcJgCCc2">第4集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k3ES4AzGEJCQhsgN2G7">第5集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k7GLK0zR0kUVw9gN3vE">第5集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k6RXIwma3zNQ6XgP9x1">第6集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k4Cdflldhyx6EYgPaGb">第6集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k2TxUlaUUXtRAugYNCN">第7集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k3PUIKU2H5woTSgYNXI">第7集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/kkFoier1PLNHK5h0Mpg">第8集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k5F7xowCjc6X7Hh0MEt">第8集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k2aMMQq6jaZQ3Jh9NbW">第9集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k2ln2xvsk5nksdh9NvT">第9集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k7zrn1agY9ulvNhbtso">第10集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k40K0VhbuOZ74Thbu5g">第10集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k3L2DRLbGG2nwihj9RY">第11集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k5ykG9liM92tQPhjaBR">第11集 Part 2</option>
+							<option value = "http://www.dailymotion.com/video/k6VotaIa1eXRuhhkRyt">第12集 Part 1</option>
+							<option value = "http://www.dailymotion.com/video/k3X0M6MHghxizthkRP8">第12集 Part 2</option>
+						</select>
+					</form>
+				</div>
+				
+				<h1><br>OST</h1>
+
+				<p class = "ost">Timeline 	(Soran)</p>
+				<iframe class = "youtube" width="560" height="315" src="https://www.youtube.com/embed/xF95VZQ6l-o" frameborder="0" allowfullscreen></iframe>
+				
+<!-- ======================================================================================================================================================= -->
+				<div class = "space"></div>
+				<div id = "footer">
+				     <a href = "第15組_watermelon.pptx" download = "watermelon">說明文件</a>
+                </div>
+			</div>
+		</div>
+		<div id = "alarm">
+		    <a href = "index.html" target = "_blank">
+			    <img style = "" src = "basePicture/clock.png"/>
+			</a>
+		</div>
+	</body>
+</html>
